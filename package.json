@@ -1,0 +1,126 @@
+{
+  "name": "geohash-compress",
+  "version": "1.0.0",
+  "description": "A data compression library for large sized Geopolygons.",
+  "main": "geoHashCompress.js",
+  "scripts": {
+    "test": "mocha --exit -r esm test.js",
+    "lint": "eslint latlon-geohash.js"
+  },
+  "keywords": [
+    "geohash",
+    "geocode",
+    "geolocation",
+    "latitude",
+    "longitude",
+    "hash compress",
+    "geohash compress",
+    "geoHashCompress",
+    "geohashCompress"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raghav1408/geohash-compress.git"
+  },
+  "author": "Raghav Sharma",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Raghav1408/geohash-compress/issues"
+  },
+  "homepage": "https://github.com/Raghav1408/geohash-compress#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "eslint": "^7.6.0",
+    "esm": "^3.0.0",
+    "mocha": "^6.0.0",
+    "@turf/turf": "^5.1.6"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": false,
+      "es6": true,
+      "mocha": true,
+      "node": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      "array-bracket-spacing": [
+        "error",
+        "always"
+      ],
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "comma-spacing": [
+        "error"
+      ],
+      "curly": [
+        "error",
+        "multi-line"
+      ],
+      "indent": [
+        "error",
+        4,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "key-spacing": [
+        "error",
+        {
+          "align": "value"
+        }
+      ],
+      "keyword-spacing": [
+        "error"
+      ],
+      "no-case-declarations": "warn",
+      "no-console": [
+        "warn",
+        {
+          "allow": [
+            "error",
+            "info"
+          ]
+        }
+      ],
+      "no-irregular-whitespace": "warn",
+      "no-redeclare": "warn",
+      "no-shadow": "warn",
+      "no-unused-vars": "warn",
+      "no-var": "error",
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "prefer-const": "error",
+      "quotes": [
+        "error",
+        "single",
+        "avoid-escape"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "space-before-blocks": [
+        "error",
+        "always"
+      ],
+      "space-in-parens": [
+        "error"
+      ],
+      "strict": [
+        "error",
+        "global"
+      ]
+    }
+  }
+}

@@ -1,7 +1,5 @@
-let geoHashCompress = require('./geoHashCompress.js');
-const geohashPoly = require('geohash-poly')
-
-console.log(geoHashCompress)
+const chai = require('chai');
+const geoHashCompress = require('./geoHashCompress.js');
 
 function reverse2DArray(array)
 {
@@ -203,24 +201,24 @@ let geoFenceIndore = [
 	[22.8650102, 75.4437466],
 	[22.8725924, 75.4375024]
 ]
-let hashes;
-geohashPoly({coords: [reverse2DArray(geoFenceIndore)], precision: 7}, function (err, h) {
-    let gfh = new geoHashCompress(h,7);
-    let compressedHashes = gfh.compress();
-    console.log(h.length,compressedHashes.length)
-})
+describe('geohash-compress',  function() {
+    it('compress', async function() { 
+        let gfh = await new geoHashCompress([reverse2DArray(geoFenceIndore)],7);   
+        chai.assert.equal(Object.keys(gfh.compress()).length, 9674); 
+    });   
+    it('insideOrOutside', async function() {
+        let gfh = await new geoHashCompress([reverse2DArray(geoFenceIndore)],7); 
+        gfh.compress();
+        chai.assert.equal( gfh.insideOrOutside(22.7418224,75.8814993),true );
+    });
+        // console.log( Object.keys(gfh.compress()).length.should.equal(9674));
+        // console.log(gfh.toGeoJson());
+        // console.log(gfh.insideOrOutside(22.7418224,75.8814993))
+    //  });
+    // it('decodes Jutland',     function() { Geohash.decode('u4pruy').should.deep.equal({ lat: 57.648, lon: 10.410 }); });
+    // it('encodes Curitiba',    function() { Geohash.encode(-25.38262, -49.26561, 8).should.equal('6gkzwgjz'); });
+    // it('decodes Curitiba',    function() { Geohash.decode('6gkzwgjz').should.deep.equal({ lat: -25.38262, lon: -49.26561 }); });
+    // it('fetches neighbours',  function() { Geohash.neighbours('ezzz').should.deep.equal({ n:'gbpb', ne:'u000', e:'spbp', se:'spbn', s:'ezzy', sw:'ezzw', w:'ezzx', nw:'gbp8' }); });
+    // it('matches geohash.org', function() { Geohash.encode(37.25, 123.75, 12).should.equal('wy85bj0hbp21'); }); // (also PostGIS; thx Jussi Nieminen)
 
-// geohashPoly({coords: [reverse2DArray(geoFenceIndore)], precision: 7}, function (err, hashes) {
-//     // fs.writeFileSync('initial_indore2.json', JSON.stringify( geohashToGeoJson.toGeoJson(hashes) ))
-// 	// fs.writeFileSync('final_indore2.json', JSON.stringify( geohashToGeoJson.toGeoJson(geohashCompress.compress(hashes,7,1))))
-// 	let result = geohashCompress.compress(hashes,7,1);
-// 	console.log(result)
-// 	let trie = new Trie();
-// 	trie.insertFromArray(result);
-// 	console.log(trie.contains(result[130]))
-// 	console.log(trie.contains(result[230]))
-// 	console.log(trie.contains(result[430]))
-// 	myCache.set("abc",trie)
-// 	// trie.contains()
-// 	console.log(hashes.length,geohashCompress.compress(hashes,7,1).length)
-// })
+});
