@@ -211,14 +211,4 @@ describe('geohash-compress',  function() {
         gfh.compress();
         chai.assert.equal( gfh.insideOrOutside(22.7418224,75.8814993),true );
     });
-        // console.log( Object.keys(gfh.compress()).length.should.equal(9674));
-        // console.log(gfh.toGeoJson());
-        // console.log(gfh.insideOrOutside(22.7418224,75.8814993))
-    //  });
-    // it('decodes Jutland',     function() { Geohash.decode('u4pruy').should.deep.equal({ lat: 57.648, lon: 10.410 }); });
-    // it('encodes Curitiba',    function() { Geohash.encode(-25.38262, -49.26561, 8).should.equal('6gkzwgjz'); });
-    // it('decodes Curitiba',    function() { Geohash.decode('6gkzwgjz').should.deep.equal({ lat: -25.38262, lon: -49.26561 }); });
-    // it('fetches neighbours',  function() { Geohash.neighbours('ezzz').should.deep.equal({ n:'gbpb', ne:'u000', e:'spbp', se:'spbn', s:'ezzy', sw:'ezzw', w:'ezzx', nw:'gbp8' }); });
-    // it('matches geohash.org', function() { Geohash.encode(37.25, 123.75, 12).should.equal('wy85bj0hbp21'); }); // (also PostGIS; thx Jussi Nieminen)
-
 });
