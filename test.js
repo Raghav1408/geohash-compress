@@ -1,5 +1,5 @@
 const chai = require('chai');
-const geoHashCompress = require('./geoHashCompress.js');
+const geoHashCompress = require('./src/geoHashCompress');
 
 function reverse2DArray(array)
 {
@@ -209,6 +209,6 @@ describe('geohash-compress',  function() {
     it('insideOrOutside', async function() {
         let gfh = await new geoHashCompress([reverse2DArray(geoFenceIndore)],7); 
         gfh.compress();
-        chai.assert.equal( gfh.insideOrOutside(22.7418224,75.8814993),true );
+        chai.assert.equal( gfh.insideOrOutside(75.8814993,22.7418224),true );
     });
 });

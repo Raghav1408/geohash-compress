@@ -2,7 +2,7 @@
   "name": "geohash-compress",
   "version": "1.0.0",
   "description": "A data compression library for large sized Geopolygons.",
-  "main": "geoHashCompress.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha --exit -r esm test.js",
     "lint": "eslint latlon-geohash.js"
@@ -29,8 +29,6 @@
   },
   "homepage": "https://github.com/Raghav1408/geohash-compress#readme",
   "dependencies": {
-  },
-  "devDependencies": {
     "chai": "^4.0.0",
     "eslint": "^7.6.0",
     "esm": "^3.0.0",
