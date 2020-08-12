@@ -55,12 +55,12 @@ Final data size of polygon : 1.2 MB
 ```
 
 
-<div class="image123">
-    <div style="float:centre;margin-right:5px;">
+<div class="image123" align="centre">
+    <div style="float:auto;margin-right:5px;">
         <img src="./images/image1.png" height="400" width="430" title = "after compression"/>
         <p style="text-align:center;">Without compression(34.8 MB)</p>
     </div>
-    <div style="float:centre;margin-right:5px;">
+    <div style="float:auto;margin-right:5px;">
         <img src="./images/image3.png" height="400" width="430" title = "after compression"/>
         <p style="text-align:center;">Without compression(1.2 MB)</p>
     </div>
