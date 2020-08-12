@@ -1,6 +1,6 @@
 {
   "name": "geohash-compress",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A data compression library for large sized Geopolygons.",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "eslint": "^7.6.0",
     "esm": "^3.0.0",
     "mocha": "^6.0.0",
-    "@turf/turf": "^5.1.6"
+    "@turf/invariant": "^5.1.6"
   },
   "eslintConfig": {
     "env": {
