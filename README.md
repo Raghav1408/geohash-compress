@@ -39,7 +39,16 @@ npm run test
 ## Usage in Node.js example
 ```js
 const geoHashCompress = require('geoHashCompress');
-const polygon = await new geoHashCompress([reverse2DArray(geoFenceIndore)],7);
+// Geofence is array of {long,lat} of the geofence.
+/*** geofence = [[
+	[22.8725924, 75.4375024],
+	[22.9105034, 75.4401784],
+	[22.9185316, 75.4562348],
+	[22.9287898, 75.4620329],
+    [22.8725924, 75.4375024],
+    ]]
+***/
+const polygon = await new geoHashCompress(geofence,7); 
 let hashes = polygon.compress()); // returns a map with geohash as key
 console.log(polygon.insideOrOutside(22.7418224,75.8814993)) // returns true if a point is inside the polygon.
 const geojson = polygon.toGeoJson(); // returns compressed geometry as Geojson.
