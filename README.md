@@ -11,12 +11,12 @@ npm install geohash-compress
 ```
 
 
-### Download
+### Run test locally
 
 1. Clone this repo
 
 ``` html
-https://github.com/<your-username>/geohash-compress.git
+https://github.com/raghav1408/geohash-compress.git
 ```
 
 2. Install NPM packages
