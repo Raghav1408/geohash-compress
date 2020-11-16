@@ -38,20 +38,29 @@ npm run test
 <!-- USAGE EXAMPLES -->
 ## Usage in Node.js example
 ```js
-const geoHashCompress = require('geoHashCompress');
+const geoHashCompress = require('geohash-compress');
 // Geofence is array of {long,lat} of the geofence.
-/*** geofence = [[
-	[22.8725924, 75.4375024],
-	[22.9105034, 75.4401784],
-	[22.9185316, 75.4562348],
-	[22.9287898, 75.4620329],
-    [22.8725924, 75.4375024],
+(async()=>{
+    let geofence = [[
+        [75.4375024, 22.8725924],
+        [75.4401784, 22.9105034],
+        [75.4562348, 22.9185316],
+        [75.4620329, 22.9287898],
+        [75.4375024, 22.8725924],
     ]]
-***/
-const polygon = await new geoHashCompress(geofence,7); 
-let hashes = polygon.compress()); // returns a map with geohash as key
-console.log(polygon.insideOrOutside(22.7418224,75.8814993)) // returns true if a point is inside the polygon.
-const geojson = polygon.toGeoJson(); // returns compressed geometry as Geojson.
+    //construct a new polygon from the geofence
+    const polygon = await new geoHashCompress(geofence,7); 
+    
+    // compress the polygon and returns a map with geohash as key eg: {tsj8p6n:true}
+    polygon.compress(); 
+    
+    //polygon.insideOrOutside(long,lat) return true/false if point{long,lat} is inside/outside polygon.
+    console.log(polygon.insideOrOutside(75.8814993,22.7418224)) 
+    
+    // returns compressed geometry as Geojson.
+    const geojson = polygon.toGeoJson();
+})()
+ 
 ```
 
 ## Benchmarks
@@ -63,8 +72,18 @@ Final data size of polygon : 1.2 MB
 100 point-in-polygon query with compression: 4ms
 ```
 
-
-<div class="image123">
+![](/images/image1.png)![](images/image3.png)
+<div style="display: flex; justify-content: center;text-align:center">
+    <div float="centre">
+        <img src="https://raw.githubusercontent.com/Raghav1408/geohash-compress/HEAD/images/image1.png" height="400" width="400" title = "after compression"/>
+    <figcaption>Without compression(34.8 MB)</figcaption>
+    </div>
+     <div float="centre">
+         <img src="https://raw.githubusercontent.com/Raghav1408/geohash-compress/HEAD/images/image3.png" height="400" width="400" title = "after compression"/>
+         <figcaption>With compression(1.2 MB)</figcaption>
+    </div>
+</div>
+<!-- <div class="image123">
     <div style="float:auto;margin-right:5px;">
         <img src="https://raw.githubusercontent.com/Raghav1408/geohash-compress/HEAD/images/image1.png" height="400" width="430" title = "after compression"/>
         <p style="text-align:center;">Without compression(34.8 MB)</p>
@@ -73,7 +92,7 @@ Final data size of polygon : 1.2 MB
         <img src="https://raw.githubusercontent.com/Raghav1408/geohash-compress/HEAD/images/image3.png" height="400" width="430" title = "after compression"/>
         <p style="text-align:center;">Without compression(1.2 MB)</p>
     </div>
-</div>
+</div> -->
 
 
 <!-- LICENSE -->

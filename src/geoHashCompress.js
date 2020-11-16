@@ -1,6 +1,6 @@
 const { Geohash } = require('./Geohash');
 let nodeGeohash = require('ngeohash')
-let turf = require('@turf/invariant')
+let turf = require('@turf/turf')
 const geohashPoly = require('geohash-poly')
 class geoHashCompress {
 	/**
