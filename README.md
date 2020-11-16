@@ -72,28 +72,7 @@ Final data size of polygon : 1.2 MB
 100 point-in-polygon query with compression: 4ms
 ```
 
-![](/images/image1.png)![](images/image3.png)
-<div style="display: flex; justify-content: center;text-align:center">
-    <div float="centre">
-        <img src="https://raw.githubusercontent.com/Raghav1408/geohash-compress/HEAD/images/image1.png" height="400" width="400" title = "after compression"/>
-    <figcaption>Without compression(34.8 MB)</figcaption>
-    </div>
-     <div float="centre">
-         <img src="https://raw.githubusercontent.com/Raghav1408/geohash-compress/HEAD/images/image3.png" height="400" width="400" title = "after compression"/>
-         <figcaption>With compression(1.2 MB)</figcaption>
-    </div>
-</div>
-<!-- <div class="image123">
-    <div style="float:auto;margin-right:5px;">
-        <img src="https://raw.githubusercontent.com/Raghav1408/geohash-compress/HEAD/images/image1.png" height="400" width="430" title = "after compression"/>
-        <p style="text-align:center;">Without compression(34.8 MB)</p>
-    </div>
-    <div style="float:auto;margin-right:5px;">
-        <img src="https://raw.githubusercontent.com/Raghav1408/geohash-compress/HEAD/images/image3.png" height="400" width="430" title = "after compression"/>
-        <p style="text-align:center;">Without compression(1.2 MB)</p>
-    </div>
-</div> -->
-
+![Without Compression 34.8 MB](/images/image1.png)![With Compression 1.2MB](images/image3.png)
 
 <!-- LICENSE -->
 ## License
