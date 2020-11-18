@@ -52,7 +52,10 @@ const geoHashCompress = require('geohash-compress');
     const polygon = await new geoHashCompress(geofence,7); 
     
     // compress the polygon and returns a map with geohash as key eg: {tsj8p6n:true}
-    polygon.compress(); 
+    let hashes = polygon.compress(); 
+
+    // prints object {...,tsj8p6n:true,tsj8p6o:true,tsj8p6p:true,...}
+    console.log(hashes)
     
     //polygon.insideOrOutside(long,lat) return true/false if point{long,lat} is inside/outside polygon.
     console.log(polygon.insideOrOutside(75.8814993,22.7418224)) 
@@ -73,7 +76,7 @@ Final data size of polygon : 1.2 MB
 ```
 
 ![Without Compression 34.8 MB](/images/image1.png)![With Compression 1.2MB](images/image3.png)
-*Without Compression 34.8 MB*                     ->               *With Compression 1.2 MB*
+*Without Compression 34.8 MB* -> *With Compression 1.2 MB*
 <!-- LICENSE -->
 ## License
 
