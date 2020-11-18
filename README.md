@@ -76,7 +76,7 @@ Final data size of polygon : 1.2 MB
 ```
 
 ![Without Compression 34.8 MB](/images/image1.png)![With Compression 1.2MB](images/image3.png)
-*Without Compression 34.8 MB* -> *With Compression 1.2 MB*
+### *Without Compression 34.8 MB* -> *With Compression 1.2 MB*
 <!-- LICENSE -->
 ## License
 
