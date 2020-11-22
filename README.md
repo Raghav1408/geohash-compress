@@ -48,16 +48,19 @@ const geoHashCompress = require('geohash-compress');
         [75.4620329, 22.9287898],
         [75.4375024, 22.8725924],
     ]]
-    //construct a new polygon from the geofence
-    const polygon = await new geoHashCompress(geofence,7); 
+    //construct a new polygon from the geofence 
+    // maximum hash length in the output = 7(default = 7)
+    // minimum hash length(if possible) in the output = 1(default = 1)
+    const polygon = await new geoHashCompress(geofence,7,1); 
     
     // compress the polygon and returns a map with geohash as key eg: {tsj8p6n:true}
     let hashes = polygon.compress(); 
 
-    // prints object {...,tsj8p6n:true,tsj8p6o:true,tsj8p6p:true,...}
+    // prints object {...,tsj8:true,tsj8p6n:true,tsj8p6o:true,tsj8p6p:true,...}
     console.log(hashes)
     
-    //polygon.insideOrOutside(long,lat) return true/false if point{long,lat} is inside/outside polygon.
+    //polygon.insideOrOutside(long,lat) 
+    //return true/false if point{long,lat} is inside/outside polygon.
     console.log(polygon.insideOrOutside(75.8814993,22.7418224)) 
     
     // returns compressed geometry as Geojson.
