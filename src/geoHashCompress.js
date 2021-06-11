@@ -4,30 +4,33 @@ let turf = require('@turf/turf')
 const geohashPoly = require('geohash-poly')
 class geoHashCompress {
 	/**
-     * @param   {[[[number,number]]]} polygon - array of [long,lat] geofence/boundary of polygon.
+     * @param   {[[[number,number]]]} polygon - array of arrays of [long,lat] geofence/boundary of polygon.
      * @param   {number} maxPrecision - Maximum precision of hashes generated.
      * @param   {number} minPrecision - Minimum precision of hash generated.
      */
-	constructor(polygon, maxPrecision = 7, minPrecision = 1) {
+	constructor(hashes, maxPrecision = 7, minPrecision = 1) {
 		this._hashes = [];
 		this._currentPrecision = maxPrecision;
 		this._intialPrecison = maxPrecision;
 		this._minPrecision = minPrecision;
 		this._result = {};
-		this.init(polygon);
+    this._hashes = hashes;
 		return this;
 	}
 
-	async init(polygon){
-		let hashes;
-		await geohashPoly({coords: polygon, precision: this._currentPrecision}, function (err, result) {
-			if(err){
-				throw Error(err);
-			}
-			hashes = result;
-		})
-		this._hashes = hashes;
-	}
+	async init(polygon) {
+    const {_currentPrecision} = this
+		this._hashes = await new Promise((resolve, reject) => {
+      geohashPoly({coords: polygon, precision: _currentPrecision}, (err, result) => {
+        if(err) {
+          reject(Error(err))
+        } else {
+          console.log("finished load 1")
+          resolve(result)
+        }
+      })
+    })
+  }
 	/**
      *  Method to generate all higher order polygon from a given Geohash.
      */

@@ -33,7 +33,15 @@
     "chai": "^4.0.0",
     "eslint": "^7.6.0",
     "esm": "^3.0.0",
-    "mocha": "^6.0.0"
+    "mocha": "^6.0.0",
+    "geohash-poly": "^0.6.0",
+    "ngeohash": "^0.6.3",
+    "through2": "^4.0.2"
+  },
+  "peerDependencies": {
+    "geohash-poly": "^0.6.0",
+    "ngeohash": "^0.6.3",
+    "through2": "^4.0.2"
   },
   "eslintConfig": {
     "env": {
