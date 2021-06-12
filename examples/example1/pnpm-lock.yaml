@@ -1,13 +1,13 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@lacuna/geohash-compress': file:../.
+  '@lacuna/geohash-compress': file:../../.
   geohash-poly: ^0.6.0
   ngeohash: ^0.6.3
   through2: ^4.0.2
 
 dependencies:
-  '@lacuna/geohash-compress': link:..
+  '@lacuna/geohash-compress': link:../..
   geohash-poly: 0.6.0
   ngeohash: 0.6.3
   through2: 4.0.2

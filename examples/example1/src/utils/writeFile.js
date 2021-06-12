@@ -8,3 +8,7 @@ export const writeFile = (file, content) => {
   }
   fs.writeFileSync(file, content)
 }
+
+export const writeVariableToJsFile = (variableName, obj) => {
+  writeFile(`./output/${variableName}.js`, `var ${variableName} = ${JSON.stringify(obj, null, 2)}`)
+}

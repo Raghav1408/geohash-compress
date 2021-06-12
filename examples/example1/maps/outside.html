@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Map of all the outside points</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+    <style>
+      body { margin: 0; padding: 0; }
+      #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+
+    <script src="../output/outside.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoibGFjdW5hLW1hcGJveCIsImEiOiJjanBva3A0cjEwZXdkNDJydW91Ym82aGpyIn0.Qh-ak-vPBz7EL3ngRdNRZQ';
+        var map = new mapboxgl.Map({
+          container: 'map', // container ID
+          style: 'mapbox://styles/mapbox/light-v10', // style URL
+          center: [-118.3941650390625, 34.093610452768715], // starting position
+          zoom: 9 // starting zoom
+        });
+      
+        map.on('load', function () {
+          // Add a data source containing GeoJSON data.
+          console.log('data is', outside)
+          map.addSource('my-source', outside);
+          
+          const dotLayer = {
+            id: 'points',
+            type: 'circle',
+            source: 'my-source',
+            paint: {
+              'circle-radius': 0.75,
+              'circle-color': '#f00'
+            }
+          }
+          map.addLayer(dotLayer);
+        });
+    </script>
+  
+  </body>
+</html>

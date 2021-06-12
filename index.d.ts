@@ -5,7 +5,8 @@ export module '@lacuna/geohash-compress' {
   declare class GeoHashCompress {
     constructor(compressedHashes: Set<string>, maxPrecision: number, minPrecision: number);
     contains(long: number, lat: number): boolean;
-    set: Set<string>
+    set: Set<string>;
+    toGeoJson(): any;
   }
 
   declare const geoHashCompressFromPoly = async (polygon: CoordinatesArray, precision: number, minPrecision: number) => GeoHashCompress

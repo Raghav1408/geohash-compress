@@ -30,11 +30,9 @@ export class GeoHashCompress {
 		}
 		return false;
 	}
-	/**
-	 * @returns {bool} true/false - true if point is inside the polygon or vice versa.
-     */
+
 	toGeoJson() {
-		const hashes = [...this._set];
+		const hashes = [...this.set];
 		const hashes_bbox = [];
 		hashes.forEach((hash) => {
 			const [minLat,minLong,maxLat,maxLong] = nodeGeohash.decode_bbox(hash)
@@ -46,6 +44,12 @@ export class GeoHashCompress {
 				[minLong,minLat]
 			])
 		})
-		return turf.getGeom(turf.polygon(hashes_bbox))
+		return {
+      type: 'geojson',
+      data: {
+        "type": "Feature",
+        "geometry": turf.getGeom(turf.polygon(hashes_bbox))
+      }
+    }
 	}
 }
