@@ -1,13 +1,11 @@
 {
-  "name": "geohash-compress",
-  "version": "1.1.5",
+  "name": "@lacuna/geohash-compress",
+  "version": "1.0.0",
   "description": "A data compression library for large sized Geopolygons.",
   "main": "index.js",
   "typings": "index.d.ts",
   "type": "module",
   "scripts": {
-    "test": "mocha --exit -r esm test.js",
-    "lint": "eslint latlon-geohash.js"
   },
   "keywords": [
     "geohash",
@@ -22,14 +20,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Raghav1408/geohash-compress.git"
+    "url": "git+https://github.com/lacuna-tech/geohash-compress.git"
   },
-  "author": "Raghav Sharma",
+  "author": "Ethan Sherr",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Raghav1408/geohash-compress/issues"
+    "url": "https://github.com/lacuna-tech/geohash-compress/issues"
   },
-  "homepage": "https://github.com/Raghav1408/geohash-compress#readme",
+  "homepage": "https://github.com/lacuna-tech/geohash-compress#readme",
   "dependencies": {
     "@turf/turf": "^5.1.6",
     "chai": "^4.0.0",
