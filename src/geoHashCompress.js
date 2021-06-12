@@ -1,18 +1,16 @@
 import { Geohash } from './Geohash.js'
 import nodeGeohash from 'ngeohash'
 import turf from '@turf/turf'
-export class geoHashCompress {
+export class GeoHashCompress {
 	/**
      * @param   {Set} compressedHashes - compressed hash set of the polygon
      * @param   {number} maxPrecision - Maximum precision of hashes generated.
      * @param   {number} minPrecision - Minimum precision of hash generated.
      */
 	constructor(compressedHashes, maxPrecision = 7, minPrecision = 1) {
-		this._currentPrecision = maxPrecision;
-		this._intialPrecison = maxPrecision;
-		this._minPrecision = minPrecision;
-		this._result = compressedHashes;
-		return this;
+		this.maxPrecision = maxPrecision;
+		this.minPrecision = minPrecision;
+		this.set = compressedHashes;
 	}
 
 	/**
@@ -24,9 +22,9 @@ export class geoHashCompress {
 		if (isNaN(lat) || isNaN(long)) {
 			throw Error('Latitude and Longitude should be Numbers!');
 		}
-		const hash = Geohash.encode(lat, long, this._intialPrecison);
+		const hash = Geohash.encode(lat, long, this.maxPrecision);
 		for (let i = 1; i <= hash.length; i++) {
-			if (this._result[hash.slice(0, i)]) {
+			if (this.set.has(hash.slice(0, i))) {
 				return true;
 			}
 		}
@@ -36,10 +34,10 @@ export class geoHashCompress {
 	 * @returns {bool} true/false - true if point is inside the polygon or vice versa.
      */
 	toGeoJson() {
-		let hashes = Object.keys(this._result);
-		let hashes_bbox = [];
+		const hashes = [...this._set];
+		const hashes_bbox = [];
 		hashes.forEach((hash) => {
-			let [minLat,minLong,maxLat,maxLong] = nodeGeohash.decode_bbox(hash)
+			const [minLat,minLong,maxLat,maxLong] = nodeGeohash.decode_bbox(hash)
 			hashes_bbox.push([
 				[minLong,minLat],
 				[maxLong,minLat,],

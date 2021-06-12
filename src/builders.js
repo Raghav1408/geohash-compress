@@ -1,12 +1,15 @@
-import {geoHashCompress} from './geoHashCompress.js'
+import { GeoHashCompress } from './GeoHashCompress.js'
 import geohashPoly from 'geohash-poly'
-import fs from 'fs'
 
 export const geoHashCompressFromPoly = async (polygon, precision = 7, minPrecision = 1) => {
-  const uncompressedHash = await getUncompressedHashFromCoords(polygon, precision);
-  const compressedHash = compress(uncompressedHash, precision, minPrecision);
-  const geohash = new geoHashCompress(compressedHash, precision, minPrecision);
-  return geohash;
+  const compressedHashSet = new Set(await buildCompressedHashSet(polygon, precision = 7, minPrecision = 1))
+  return new GeoHashCompress(compressedHashSet, precision, minPrecision);
+}
+
+export const buildCompressedHashSet = async (polygon, precision = 7, minPrecision = 1) => {
+  const uncompressedHashArr = await getUncompressedHashFromCoords(polygon, precision);
+  const compressedHashArr = compress(uncompressedHashArr, precision, minPrecision);
+  return compressedHashArr;
 }
 
 const getUncompressedHashFromCoords = (coords, precision) => new Promise((resolve, reject) => {
@@ -20,7 +23,7 @@ const getUncompressedHashFromCoords = (coords, precision) => new Promise((resolv
 });
 
 const compress = (uncompressedHash, precision, minPrecision) => {
-  const result = {};
+  const result = [];
   if (!Array.isArray(uncompressedHash)) {
     throw new Error('Hashes must be an Arrray');
   }
@@ -42,7 +45,7 @@ const compress = (uncompressedHash, precision, minPrecision) => {
   precisions.forEach((finalPrecisions) => {
     let hashes = Object.keys(data[finalPrecisions])
     hashes.forEach((hash) => {
-      result[hash] = true;
+      result.push(hash)
       delete data[finalPrecisions][hash];
     });
   });
@@ -60,17 +63,15 @@ const decreasePrecison = (data, currentPrecison) => {
     const subHash = hash.substr(0, hash.length - 1);
     const combinations = base32.map((c) => `${subHash}${c}`);
 
-    (() => {
-      for (const combination of combinations) {
-        if (!(combination in data[currentPrecison])) return;
-      }
-      for (const combination of combinations) {
-        delete data[currentPrecison][combination];
-      }
-      if (!(currentPrecison - 1 in data)) {
-        data[currentPrecison - 1] = {};
-      }
-      data[currentPrecison - 1][hash.substr(0, hash.length - 1)] = 1;
-    })();
+    for (const combination of combinations) {
+      if (!(combination in data[currentPrecison])) return;
+    }
+    for (const combination of combinations) {
+      delete data[currentPrecison][combination];
+    }
+    if (!(currentPrecison - 1 in data)) {
+      data[currentPrecison - 1] = {};
+    }
+    data[currentPrecison - 1][hash.substr(0, hash.length - 1)] = 1;
   }
 }

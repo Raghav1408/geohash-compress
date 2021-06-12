@@ -1,2 +1,2 @@
-export * from './src/geoHashCompress.js'
-export * from './src/geoHashCompressFromPoly.js'
+export * from './src/GeoHashCompress.js'
+export * from './src/builders.js'
