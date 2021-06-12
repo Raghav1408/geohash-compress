@@ -7,64 +7,56 @@ A data compression and [Geo-hasing](http://en.wikipedia.org/wiki/Geohash) librar
 ## Installation
 ### In Node.js
 ``` sh
-npm install geohash-compress 
+pnpm install @lacuna/geohash-compress 
 ```
-
-
-### Run test locally
-
-1. Clone this repo
-
-``` html
-https://github.com/raghav1408/geohash-compress.git
-```
-
-2. Install NPM packages
-
-``` html
-npm install
-```
-
-3. Run tests
-
-``` html
-npm run test
-```
-
-
-
-
 
 <!-- USAGE EXAMPLES -->
-## Usage in Node.js example
-```js
-const geoHashCompress = require('geohash-compress');
-// Geofence is array of {long,lat} of the geofence.
+## Simple Usage
+```ts
+import { geoHashCompressFromPoly, GeoHashCompress } from '@lacuna/geohash-compress'
+
 (async()=>{
-    let geofence = [[
+    // an array of arrays of [long, lat]
+    const geofence = [[
         [75.4375024, 22.8725924],
         [75.4401784, 22.9105034],
         [75.4562348, 22.9185316],
         [75.4620329, 22.9287898],
         [75.4375024, 22.8725924],
     ]]
-    //construct a new polygon from the geofence 
-    // maximum hash length in the output = 7(default = 7)
-    // minimum hash length(if possible) in the output = 1(default = 1)
-    const polygon = await new geoHashCompress(geofence,7,1); 
-    
-    // compress the polygon and returns a map with geohash as key eg: {tsj8p6n:true}
-    let hashes = polygon.compress(); 
+    const maxHashLength = 7;
+    const minHashLength = 1
+    // this step can take a while, as it's turning a polygon into a hash-set then compressing it.  It is best to do this offline as demonstrated in "more performant usage" section bellow
+    const polygon: GeoHashCompress = await geoHashCompressFromPoly(geofence, maxHashLength, minHashLength);
 
-    // prints object {...,tsj8:true,tsj8p6n:true,tsj8p6o:true,tsj8p6p:true,...}
-    console.log(hashes)
-    
-    //polygon.insideOrOutside(long,lat) 
-    //return true/false if point{long,lat} is inside/outside polygon.
-    console.log(polygon.insideOrOutside(75.8814993,22.7418224)) 
-    
-    // returns compressed geometry as Geojson.
-    const geojson = polygon.toGeoJson();
+    console.log(polygon.contains(75.8814993,22.7418224)) 
+})()
+ 
+```
+
+## More performant usage
+```ts
+import { buildCompressedHashSet, GeoHashCompress } from '@lacuna/geohash-compress'
+import fs from 'fs'
+
+(async()=>{
+    // an array of arrays of [long, lat]
+    const geofence = [[
+        [75.4375024, 22.8725924],
+        [75.4401784, 22.9105034],
+        [75.4562348, 22.9185316],
+        [75.4620329, 22.9287898],
+        [75.4375024, 22.8725924],
+    ]]
+    const maxHashLength = 7;
+    const minHashLength = 1
+
+    // Store this compressed hash array (string array) for cached usage later.  Write to disk / read from disk on app start - as the buildCompressedHashSet is computationally expensive
+    const hash: string[] = await buildCompressedHashSet(geofence, maxHashLength, minHashLength);
+
+    const polygon = new GeoHashCompress(new Set([...hash]), maxHashLength, minHashLength);
+    // do lots of polygon.contain calls!
+    console.log(polygon.contains(75.8814993,22.7418224)) 
 })()
  
 ```
