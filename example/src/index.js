@@ -1,4 +1,4 @@
-import {geoHashCompressFromPoly} from 'geohash-compress'
+import {geoHashCompressFromPoly} from '@lacuna/geohash-compress'
 import { laFeature, laWithHoles } from '../la.js'
 import { writeFile } from './utils/writeFile.js'
 

@@ -1,4 +1,4 @@
-export module 'geohash-compress' {
+export module '@lacuna/geohash-compress' {
 
   declare type CoordinatesArray = Array<Array<Array<number>>>
 
