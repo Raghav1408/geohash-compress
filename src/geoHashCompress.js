@@ -1,8 +1,7 @@
-const { Geohash } = require('./Geohash');
-let nodeGeohash = require('ngeohash')
-let turf = require('@turf/turf')
-const geohashPoly = require('geohash-poly')
-class geoHashCompress {
+import { Geohash } from './Geohash.js'
+import nodeGeohash from 'ngeohash'
+import turf from '@turf/turf'
+export class geoHashCompress {
 	/**
      * @param   {Set} compressedHashes - compressed hash set of the polygon
      * @param   {number} maxPrecision - Maximum precision of hashes generated.
@@ -52,4 +51,3 @@ class geoHashCompress {
 		return turf.getGeom(turf.polygon(hashes_bbox))
 	}
 }
-module.exports = geoHashCompress;

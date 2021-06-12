@@ -1,7 +1,7 @@
-let nodeGeohash = require('ngeohash')
-let turf = require('@turf/turf')
+import nodeGeohash from 'ngeohash'
+import turf from '@turf/turf'
 
-const toGeoJson = (map) => {
+export const toGeoJson = (map) => {
     let hashes = Object.keys(map);
     let hashes_bbox = [];
     hashes.forEach((hash) => {
@@ -16,7 +16,7 @@ const toGeoJson = (map) => {
     })
     return turf.getGeom(turf.polygon(hashes_bbox))
 }
-const fromGeoJson = (geoJson) => {
+export const fromGeoJson = (geoJson) => {
     if(geoJson.type != 'Polygon'){
         throw Error('Geojson type must be a polygon!')
     }
@@ -26,8 +26,4 @@ const fromGeoJson = (geoJson) => {
     console.log("geometry",geoJson.coordinates);
     return (geoJson.coordinates)[0];
 
-}
-module.exports = {
-    toGeoJson,
-    fromGeoJson
 }

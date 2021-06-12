@@ -1,8 +1,8 @@
-const geoHashCompress = require('./geoHashCompress.js');
-const geohashPoly = require('geohash-poly');
-const fs = require('fs');
+import {geoHashCompress} from './geoHashCompress.js'
+import geohashPoly from 'geohash-poly'
+import fs from 'fs'
 
-module.exports = async (polygon, precision = 7, minPrecision = 1) => {
+export const geoHashCompressFromPoly = async (polygon, precision = 7, minPrecision = 1) => {
   const uncompressedHash = await getUncompressedHashFromCoords(polygon, precision);
   const compressedHash = compress(uncompressedHash, precision, minPrecision);
   const geohash = new geoHashCompress(compressedHash, precision, minPrecision);

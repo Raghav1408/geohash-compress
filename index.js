@@ -1,3 +1,2 @@
-const geoHashCompress = require('./src/geoHashCompress');
-const geoHashCompressFromPoly = require('./src/geoHashCompressFromPoly');
-module.exports = {geoHashCompress, geoHashCompressFromPoly}
+export * from './src/geoHashCompress.js'
+export * from './src/geoHashCompressFromPoly.js'
