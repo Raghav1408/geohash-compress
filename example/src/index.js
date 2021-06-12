@@ -1,39 +1,27 @@
 import {geoHashCompressFromPoly} from 'geohash-compress'
-import { laFeature, laWithHoles } from './la.js'
-import geohashPoly from 'geohash-poly'
-import fs from 'fs'
+import { laFeature, laWithHoles } from '../la.js'
+import { writeFile } from './utils/writeFile.js'
 
 const main = async () => {
   console.time('init')
-  console.time('poly to uncompressed')
   const lngLats = laWithHoles.features[0].geometry.coordinates
   const polygon = await geoHashCompressFromPoly(lngLats, 7)
-  console.timeEnd('poly to uncompressed')
-
-  let hashes = {}
-  try {
-    console.time('compress')
-    hashes = polygon.compress()
-    console.timeEnd('compress')
-    fs.writeFileSync('./output/outHash.json', JSON.stringify(hashes))
-  } catch (e) {
-    console.error("this went wrong", e)
-  }
   console.timeEnd('init')
 
-  console.time('t')
-    const a = []
-    for (let i = 0; i < 400000; i++) {
-      const {lng, lat} = makeRandomPointCenteredOn(-118.3941650390625, 34.093610452768715, 0.5)
-      if (polygon.insideOrOutside(lng, lat)) {
-        a.push([lng, lat])
-      }
-
-    }
-  console.timeEnd('t')
-  // console.log('IN', a.filter(a => a))
-
-  writeFeatureCollection('./output/yes.json', a)
+  const maxIterations = 400000
+  const timingTag = `compute ${maxIterations} pts`
+  console.time(timingTag)
+  const a = []
+  for (let i = 0; i < maxIterations; i++) {
+    const { lng, lat } = makeRandomPointCenteredOn(-118.3941650390625, 34.093610452768715, 0.5)
+    a.push({
+      coordinates: [lng, lat], 
+      inside: polygon.contains(lng, lat)
+    })
+  }
+  console.timeEnd(timingTag)
+  writeFeatureCollection('./output/in.json', a.filter( a => a.inside).map(a => a.coordinates))
+  writeFeatureCollection('./output/out.json', a.filter( a => !a.inside).map(a => a.coordinates))
 }
 
 const writeFeatureCollection = (filename, lngLats) => {
@@ -45,7 +33,7 @@ const writeFeatureCollection = (filename, lngLats) => {
       "coordinates": lngLat
     }
   }))
-  fs.writeFileSync(filename, JSON.stringify(data,null,4))
+  writeFile(filename, JSON.stringify(data,null,4))
 }
 
 const makeRandomPointCenteredOn = (lng, lat, delta) => {
