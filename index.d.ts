@@ -5,8 +5,9 @@ export module 'geohash-compress' {
   declare class GeoHashCompress {
     constructor(compressedHashes: Set<string>, maxPrecision: number, minPrecision: number);
     contains(long: number, lat: number): boolean;
+    set: Set<string>
   }
 
-  declare const geoHashCompressFromPoly = (polygon: CoordinatesArray, precision: number, minPrecision: number) => GeoHashCompress
-  declare const buildCompressedHashSet = (polygon: CoordinatesArray, precision: number, minPrecision: number) => GeoHashCompress
+  declare const geoHashCompressFromPoly = async (polygon: CoordinatesArray, precision: number, minPrecision: number) => GeoHashCompress
+  declare const buildCompressedHashSet = async (polygon: CoordinatesArray, precision: number, minPrecision: number) => GeoHashCompress
 }

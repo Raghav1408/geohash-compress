@@ -6,6 +6,9 @@ const main = async () => {
   console.time('init')
   const lngLats = laWithHoles.features[0].geometry.coordinates
   const polygon = await geoHashCompressFromPoly(lngLats, 7)
+
+  
+  writeFile('./output/LA-Hash7.json', JSON.stringify([...polygon.set]))
   console.timeEnd('init')
 
   const maxIterations = 400000
