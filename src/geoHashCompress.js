@@ -1,6 +1,5 @@
 import { Geohash } from './Geohash.js'
-// import nodeGeohash from 'ngeohash'
-// import turf from '@turf/turf'
+
 export class GeoHashCompress {
 	/**
      * @param   {Set} compressedHashes - compressed hash set of the polygon
@@ -30,30 +29,4 @@ export class GeoHashCompress {
 		}
 		return false;
 	}
-
-  toGeoJson() {
-    return {}
-  }
-
-	// toGeoJson() {
-	// 	const hashes = [...this.set];
-	// 	const hashes_bbox = [];
-	// 	hashes.forEach((hash) => {
-	// 		const [minLat,minLong,maxLat,maxLong] = nodeGeohash.decode_bbox(hash)
-	// 		hashes_bbox.push([
-	// 			[minLong,minLat],
-	// 			[maxLong,minLat,],
-	// 			[maxLong,maxLat,],
-	// 			[minLong,maxLat],
-	// 			[minLong,minLat]
-	// 		])
-	// 	})
-	// 	return {
-  //     type: 'geojson',
-  //     data: {
-  //       "type": "Feature",
-  //       "geometry": turf.getGeom(turf.polygon(hashes_bbox))
-  //     }
-  //   }
-	// }
 }

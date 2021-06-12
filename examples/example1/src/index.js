@@ -1,13 +1,13 @@
 import {geoHashCompressFromPoly} from '@lacuna/geohash-compress'
 import { laFeature, laWithHoles } from '../la.js'
 import { writeFile, writeVariableToJsFile } from './utils/writeFile.js'
-import { makeRandomPointCenteredOn } from './utils/mapHelpers.js'
+import { makeRandomPointCenteredOn, hashesToGeoJson } from './utils/mapHelpers.js'
 
 const main = async () => {
   console.time('init')
   const lngLats = laWithHoles.features[0].geometry.coordinates
   const polygon = await geoHashCompressFromPoly(lngLats, 7)
-  writeVariableToJsFile('hashToPoly', polygon.toGeoJson())
+  writeVariableToJsFile('hashToPoly', hashesToGeoJson([...polygon.set]))
   console.timeEnd('init')
 
   const maxIterations = 400000

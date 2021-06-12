@@ -29,14 +29,12 @@
   },
   "homepage": "https://github.com/lacuna-tech/geohash-compress#readme",
   "dependencies": {
-    "@turf/turf": "^5.1.6",
-    "chai": "^4.0.0",
-    "eslint": "^7.6.0",
-    "esm": "^3.0.0",
+    "geohash-poly": "^0.6.0"
+  },
+  "devDependencies": {
     "mocha": "^6.0.0",
-    "geohash-poly": "^0.6.0",
-    "ngeohash": "^0.6.3",
-    "through2": "^4.0.2"
+    "chai": "^4.0.0",
+    "eslint": "^7.6.0"
   },
   "eslintConfig": {
     "env": {
